@@ -28,12 +28,12 @@ Create a Bitter with a Redis client (Predis as example):
     $redisClient = new \Predis\Client();
     $bitter = new FreeAgent\Bitter($redisClient);
 
-Mark user 404 as active and has been kicked by Chuck Norris:
+Mark user 123 as active and has played a song:
 
 .. code-block:: php
 
-    $bitter->mark('active', 404);
-    $bitter->mark('kicked_by_chuck_norris', 404);
+    $bitter->mark('active', 123);
+    $bitter->mark('song:played', 123);
 
 How many users that were active yesterday are active today:
 
@@ -46,9 +46,9 @@ How many users that were active yesterday are active today:
         ->bitOpAnd('bit_op_example', $today, $yesterday)
         ->count('bit_op_example')
     ;
-    echo $count . ' were active yesterday are active today.';
+    echo $count . ' users were active yesterday and today.';
 
-Test if user 13 was active yesterday and is active today:
+Test if user 123 was active yesterday and is active today:
 
 .. code-block:: php
 
@@ -57,10 +57,10 @@ Test if user 13 was active yesterday and is active today:
 
     $active = $bitter
         ->bitOpAnd('bit_op_example', $today, $yesterday)
-        ->in(13, 'bit_op_example')
+        ->in(123, 'bit_op_example')
     ;
     if ($active) {
-        echo 'User 13 was active yesterday and today.';
+        echo 'User 123 was active yesterday and today.';
     } else {
-        echo 'User 13 was not active yesterday and today.';
+        echo 'User 123 was not active yesterday and today.';
     }
