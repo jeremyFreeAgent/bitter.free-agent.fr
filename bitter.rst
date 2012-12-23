@@ -33,8 +33,10 @@ Mark user 123 as active and has played a song:
 
 .. code-block:: php
 
-    $bitter->mark('active', 123);
-    $bitter->mark('song:played', 123);
+    $bitter
+        ->mark('active', 123)
+        ->mark('song:played', 123)
+    ;
 
 .. note::
 
@@ -49,6 +51,7 @@ Pass a DateTime as third argument:
 Test if user 123 has played a song this week:
 
 .. code-block:: php
+
     $currentWeek = new FreeAgent\Bitter\Event\Week('song:played');
 
 
@@ -72,7 +75,7 @@ How many users that were active yesterday are active today:
 
 .. code-block:: php
 
-    $today     = new FreeAgent\Bitter\Event\Day('active', new \DateTime());
+    $today     = new FreeAgent\Bitter\Event\Day('active');
     $yesterday = new FreeAgent\Bitter\Event\Day('active', new \DateTime('yesterday'));
 
     $count = $bitter
@@ -88,7 +91,7 @@ Test if user 123 was active yesterday and is active today:
 
 .. code-block:: php
 
-    $today     = new FreeAgent\Bitter\Event\Day('active', new \DateTime());
+    $today     = new FreeAgent\Bitter\Event\Day('active');
     $yesterday = new FreeAgent\Bitter\Event\Day('active', new \DateTime('yesterday'));
 
     $active = $bitter
@@ -96,9 +99,9 @@ Test if user 123 was active yesterday and is active today:
         ->in(123, 'bit_op_example')
     ;
     if ($active) {
-        echo 'User 123 was active yesterday and today.';
+        echo 'User with id 123 was active yesterday and today.';
     } else {
-        echo 'User 123 was not active yesterday and today.';
+        echo 'User with id 123 was not active yesterday and today.';
     }
 
 .. note::
@@ -111,7 +114,7 @@ You can run tests with:
 
 .. code-block:: sh
 
-    bin/atoum -mcn 1 -d tests/units
+    bin/atoum -d tests/units
 
 Thanks
 ------
