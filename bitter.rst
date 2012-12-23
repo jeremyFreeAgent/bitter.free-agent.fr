@@ -11,7 +11,7 @@ In your `composer.json` you should have:
 
     {
         "require": {
-            "free-agent/bitter": "*"
+            "free-agent/bitter": "1.1.*"
         }
     }
 
@@ -107,6 +107,21 @@ Test if user 123 was active yesterday and is active today:
 .. note::
     Please look at `Redis BITOP Command <http://redis.io/commands/bitop>`_ for performance considerations.
 
+Custom date period stats
+------------------------
+How many users that were active during a given date period:
+
+.. code-block:: php
+
+    $from = new \DateTime('2010-14-02 20:15:30');
+    $to   = new \DateTime('2012-21-12 13:30:45');
+
+    $count = $bitter
+        ->bitDatePeriod('active', 'active_period_example', $from, $to)
+        ->count('active_period_example')
+    ;
+    echo $count . ' users were active from "2010-14-02 20:15:30" to "2012-21-12 13:30:45".';
+
 Unit Tests
 ----------
 
@@ -115,6 +130,12 @@ You can run tests with:
 .. code-block:: sh
 
     bin/atoum -d tests/units
+
+Release notes
+-------------
+1.1.0
+
+* Added date period stats with bitDatePeriod method.
 
 Thanks
 ------
